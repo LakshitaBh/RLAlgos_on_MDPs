@@ -1,8 +1,9 @@
 import gym
 from fourier import sine_basis
+from reinforce import reinforceWithBaseline
 import numpy as np
 def main():
-    gridworld=gym.make('MountainCar-v0')
+    mountaincar=gym.make('MountainCar-v0')
     cartpole=gym.make('CartPole-v1')
     state=np.array([0,0,0,0])
     mdp_range={
@@ -15,6 +16,8 @@ def main():
         }
     w=sine_basis(state,mdp_range,1,2)
     theta=np.random.normal(0.0,0.1,(2,len(w)))
+    reinforceWithBaseline(theta,w,mountaincar,state)
+
 
 if __name__=='__main__':
     main()
