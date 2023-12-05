@@ -13,11 +13,8 @@ def main():
         "OMEGA_MAX":2*np.pi/15,
         "OMEGA_DOT_RANGE":[-np.pi/2,np.pi/2]
         }
-    print(sine_basis(state,mdp_range,1,2))
-    policy_range={
-        
-    }
-
+    w=sine_basis(state,mdp_range,1,2)
+    theta=np.random.normal(0.0,0.1,(2,len(w)))
 
 if __name__=='__main__':
     main()
