@@ -10,7 +10,7 @@ def call_algo(params):
         params["title"]='Actor Critic Training Progress'
         actor_critic(params)
 
-def main(inputs=[1,1,700]):
+def main(inputs=[2,1,500]):
     if inputs[0]==1:
         params={
             "mdp":"CartPole-v1",
@@ -21,10 +21,10 @@ def main(inputs=[1,1,700]):
         }
     else:
         params={
-            "mdp":"MountainCar-v0",
+            "mdp":"Acrobot-v1",
             "algo":inputs[1],
             "num_episodes":inputs[2],
-            "label":'MountainCar'
+            "label":'Acrobot'
         }
     call_algo(params)
 

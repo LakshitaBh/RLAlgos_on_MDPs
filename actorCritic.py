@@ -81,8 +81,8 @@ def actor_critic(params):
     learning_rate_actor = 0.001
     learning_rate_critic = 0.01
     # Instantiate networks and optimizer
-    actor = Actor(input_size, hidden_size, output_size)
-    critic = Critic(input_size, hidden_size)
+    actor = Actor(input_size, hidden_size, output_size,1)
+    critic = Critic(input_size, hidden_size,1,1)
     actor_optimizer = optim.Adam(actor.parameters(), lr=learning_rate_actor)
     critic_optimizer = optim.Adam(critic.parameters(), lr=learning_rate_critic)
 

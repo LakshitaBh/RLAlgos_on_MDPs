@@ -11,18 +11,18 @@ class Policy(nn.Module):
             self.fc1 = nn.Linear(input_size, hidden_size[0])
             self.relu = nn.ReLU()
             self.fc2 = nn.Linear(hidden_size[0], output_size)
-            self.softmax = nn.Softmax(dim=1)
+            self.softmax = nn.Softmax(dim=-1)
         elif complexity==3:
             self.fc1 = nn.Linear(input_size, hidden_size[0])
             self.fc2 = nn.Linear(hidden_size[0], hidden_size[1])
             self.fc3 = nn.Linear(hidden_size[1], output_size)
             self.relu = nn.ReLU()
             self.tanh = nn.Tanh()
-            self.softmax = nn.Softmax(dim=1)
+            self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, state):
         if self.complexity==1:
-            return nn.functional.softmax(self.fc(state),dim=1)
+            return nn.functional.softmax(self.fc(state),dim=-1)
         elif self.complexity==2:
             state = self.fc1(state)
             state = self.relu(state)
@@ -55,7 +55,7 @@ class ValueFunction(nn.Module):
 
     def forward(self, state):
         if self.complexity==1:
-            return nn.functional.softmax(self.fc(state),dim=1)
+            return nn.functional.softmax(self.fc(state),dim=-1)
         elif self.complexity==2:
             state = self.fc1(state)
             state = self.relu(state)
@@ -74,7 +74,7 @@ class Actor(nn.Module):
         self.fc1 = nn.Linear(input_size, hidden_size[0])
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(hidden_size[0], output_size)
-        self.softmax = nn.Softmax(dim=1)
+        self.softmax = nn.Softmax(dim=-1)
 
     def forward(self, x):
         x = self.relu(self.fc1(x))
