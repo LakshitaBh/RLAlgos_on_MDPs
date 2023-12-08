@@ -48,7 +48,7 @@ class ValueFunction(nn.Module):
             self.fc=nn.Linear(input_size,output_size)
         elif complexity==2:
             self.fc1 = nn.Linear(input_size, hidden_size[0])
-            self.relu = nn.ReLU()
+            # self.relu = nn.ReLU()
             self.fc2 = nn.Linear(hidden_size[0], output_size)
         elif complexity==3:
             self.fc1 = nn.Linear(input_size, hidden_size[0])
@@ -64,7 +64,7 @@ class ValueFunction(nn.Module):
             return nn.functional.softmax(self.fc(state),dim=-1)
         elif self.complexity==2:
             state = self.fc1(state)
-            state = self.relu(state)
+            # state = self.relu(state)
             return self.fc2(state)
         elif self.complexity==3:
             state = self.relu(self.fc1(state))
