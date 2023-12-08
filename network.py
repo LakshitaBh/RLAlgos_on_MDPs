@@ -15,7 +15,9 @@ class Policy(nn.Module):
         elif complexity==3:
             self.fc1 = nn.Linear(input_size, hidden_size[0])
             self.fc2 = nn.Linear(hidden_size[0], hidden_size[1])
-            self.fc3 = nn.Linear(hidden_size[1], output_size)
+            self.fc3 = nn.Linear(hidden_size[0], hidden_size[1])
+            self.fc4 = nn.Linear(hidden_size[0], hidden_size[1])
+            self.fc5 = nn.Linear(hidden_size[1], output_size)
             self.relu = nn.ReLU()
             self.tanh = nn.Tanh()
             self.softmax = nn.Softmax(dim=-1)
@@ -31,7 +33,9 @@ class Policy(nn.Module):
         elif self.complexity==3:
             state = self.relu(self.fc1(state))
             state = self.tanh(self.fc2(state))
-            state = self.fc3(state)
+            state = self.tanh(self.fc3(state))
+            state = self.tanh(self.fc4(state))
+            state = self.fc5(state)
             return self.softmax(state)
 
         
@@ -49,7 +53,9 @@ class ValueFunction(nn.Module):
         elif complexity==3:
             self.fc1 = nn.Linear(input_size, hidden_size[0])
             self.fc2 = nn.Linear(hidden_size[0], hidden_size[1])
-            self.fc3 = nn.Linear(hidden_size[1], output_size)
+            self.fc3 = nn.Linear(hidden_size[0], hidden_size[1])
+            self.fc4 = nn.Linear(hidden_size[0], hidden_size[1])
+            self.fc5 = nn.Linear(hidden_size[1], output_size)
             self.relu = nn.ReLU()
             self.tanh = nn.Tanh()
 
@@ -63,7 +69,9 @@ class ValueFunction(nn.Module):
         elif self.complexity==3:
             state = self.relu(self.fc1(state))
             state = self.tanh(self.fc2(state))
-            return self.fc3(state)
+            state = self.tanh(self.fc3(state))
+            state = self.tanh(self.fc4(state))
+            return self.fc5(state)
 
 
 #Actor Critic
