@@ -21,22 +21,22 @@ def reinforce_baseline(params,gamma=1,alpha=0.001,alpha_w=0.001):
 
     policy_optimizer = optim.Adam(policy.parameters(), lr=alpha)
     value_optimizer = optim.Adam(value_function.parameters(), lr=alpha_w)
-    # rewards_array=[]
+    rewards_array=[]
     cumulative_reward=0
-    # cumulative_rewards=[]
+    cumulative_rewards=[]
     average_reward=[]
-    # no_steps=[]
-    # cumulative_steps=[]
-    # total_steps=0
+    no_steps=[]
+    cumulative_steps=[]
+    total_steps=0
     for episode in range(num_episodes):
         print("episode=",episode)
         state = env.reset(seed=seed)[0]
         log_probs = []
         rewards = []
         values = []
-        # episode_step=0
+        episode_step=0
         while True:
-            # episode_step+=1
+            episode_step+=1
             state = torch.FloatTensor(state).unsqueeze(0)
             action_prob = policy(state)
             value = value_function(state)
@@ -71,14 +71,14 @@ def reinforce_baseline(params,gamma=1,alpha=0.001,alpha_w=0.001):
         policy_optimizer.step()
 
 
-        # rewards_array.append(G)
+        rewards_array.append(G)
         cumulative_reward+=G
-        # cumulative_rewards.append(cumulative_reward)
+        cumulative_rewards.append(cumulative_reward)
         average_reward.append(cumulative_reward/(episode+1))
-        # total_steps+=episode_step
-        # no_steps.append(episode_step)
-        # cumulative_steps.append(total_steps)
+        total_steps+=episode_step
+        no_steps.append(episode_step)
+        cumulative_steps.append(total_steps)
 
     env.close()  
-    #return rewards_array, cumulative_rewards, average_reward, no_steps, cumulative_steps
-    return average_reward
+    return rewards_array, cumulative_rewards, average_reward, no_steps, cumulative_steps
+    #return average_reward

@@ -68,23 +68,23 @@ def call_algo(params):
         plot_graph(no_steps_list,"Number of Steps for"+params["label"]+"for different alpha_w",alpha_w_values,"Episodes","Steps")
         plot_graph(cumulative_steps_list,"Cumulative Number of Steps for"+params["label"]+"for different alpha_w",alpha_w_values,"Episodes","Cumulative Steps")
 
-def main(inputs=[1,2,500]):
-    if inputs[0]==1:
-        params={
+def main(inputs=[500]):
+    for algo in range(12):
+        params1={
             "mdp":"CartPole-v1",
-            "algo":inputs[1],
-            "num_episodes":inputs[2],
+            "algo":algo+1,
+            "num_episodes":inputs[0],
             "label":'CartPole'
 
         }
-    else:
-        params={
+        params2={
             "mdp":"Acrobot-v1",
-            "algo":inputs[1],
-            "num_episodes":inputs[2],
+            "algo":algo+1,
+            "num_episodes":inputs[0],
             "label":'Acrobot'
         }
-    call_algo(params)
+        call_algo(params1)
+        call_algo(params2)
 
 if __name__=='__main__':
     main()
