@@ -9,7 +9,7 @@ class Policy(nn.Module):
             self.fc=nn.Linear(input_size,output_size)
         elif complexity==2:
             self.fc1 = nn.Linear(input_size, hidden_size[0])
-            self.relu = nn.ReLU()
+            # self.relu = nn.ReLU()
             self.fc2 = nn.Linear(hidden_size[0], output_size)
             self.softmax = nn.Softmax(dim=-1)
         elif complexity==3:
@@ -27,7 +27,7 @@ class Policy(nn.Module):
             return nn.functional.softmax(self.fc(state),dim=-1)
         elif self.complexity==2:
             state = self.fc1(state)
-            state = self.relu(state)
+            # state = self.relu(state)
             state = self.fc2(state)
             return self.softmax(state)
         elif self.complexity==3:
